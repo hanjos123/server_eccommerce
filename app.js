@@ -17,6 +17,7 @@ const multipart = require('connect-multiparty');
 const multipartMiddleware = multipart();
 const fs = require('fs');
 
+app.set('port', process.env.PORT || 3000);
 // Conect to db
 mongoose
     .connect(process.env.MONGO_DB, {

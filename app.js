@@ -6,6 +6,8 @@ const cors = require('cors');
 const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
+const PORT = process.env.PORT || 5000;
+
 
 const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
@@ -58,8 +60,8 @@ app.use(morgan('combined'));
 // Route
 app.use('/v1/api', apiRouter);
 
-app.listen(process.env.PORT || 5000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
 });
 
 app.post('/upload',multipartMiddleware,(req,res)=>{

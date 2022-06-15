@@ -3,7 +3,6 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const port = 5000;
 const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
@@ -17,7 +16,6 @@ const multipart = require('connect-multiparty');
 const multipartMiddleware = multipart();
 const fs = require('fs');
 
-app.set('port', process.env.PORT || 3000);
 // Conect to db
 mongoose
     .connect(process.env.MONGO_DB, {
@@ -60,10 +58,9 @@ app.use(morgan('combined'));
 // Route
 app.use('/v1/api', apiRouter);
 
-app.listen(port, () => {
-    console.log(`App listening at port: ${port}`);
+app.listen(process.env.PORT || 5000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
-
 
 app.post('/upload',multipartMiddleware,(req,res)=>{
     try {
